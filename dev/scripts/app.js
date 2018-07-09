@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Accordion from './components/Accordion';
 import articles from './articles';
-import { generateLipsum, today } from "./helpers";
+import { generateLipsum, today, randomImg } from "./helpers";
 
 class App extends React.Component {
   constructor() {
@@ -39,12 +39,13 @@ class App extends React.Component {
     const currentArticlesKeys = Object.keys(currentArticles).map((key) => key.substring(7,));
     let max = Math.max(...currentArticlesKeys);
     for (let i = 1; i <= 3; i++) {
+      const imgLink = randomImg();
       const index = max + i;
       const date = today();
       const newArticle = {};
       newArticle.date = date;
       newArticle.headline = generateLipsum(3);
-      newArticle.imgLink = "https://picsum.photos/150/150/?random";
+      newArticle.imgLink = imgLink;
       newArticle.new = true;
       newArticle.subhead = generateLipsum(5);
       newArticle.text = generateLipsum(10);

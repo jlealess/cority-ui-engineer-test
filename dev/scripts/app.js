@@ -32,6 +32,8 @@ class App extends React.Component {
   }
 
   loadMore() {
+    /* NOTE: I wanted to try adding functionality to the "load more" button; without being certain what the intended functionality is for this component, I wasn't sure if it woud load newer items or older ones. For demo purposes, I have set them all to new in order to keep updating the new items counter. */
+    
     // get set of articles currently stored in state
     const currentArticles = this.state.articles;
     // find current key with highest number

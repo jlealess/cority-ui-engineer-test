@@ -39,11 +39,13 @@ const loremIpsumWords = [
 
 export const generateLipsum = (words) => {
     const wordsArray = [];
+    // create array of random words; array length is determined by argument
     for (let i=0; i <= words; i++) {
         const randomNum = Math.floor(Math.random() * Math.floor(loremIpsumWords.length));
         let randomWord = loremIpsumWords[randomNum];
         wordsArray.push(randomWord);
     }
+    // convert first character of string to uppercase
     const lipsumString = wordsArray.join(' ').replace(/^\w/, function(chr) {
       return chr.toUpperCase();
     });

@@ -102,6 +102,20 @@ $red: #c62828;
     }
 }
 
+.add-content {
+    background: lighten($blue, 55);
+    padding: 15px;
+    text-align: center;
+
+    &__text {
+        margin: 0;
+    }
+}
+
+.app {
+    padding: 1.5rem;
+}
+
 .article {
     border-left: 5px solid transparent;
     margin-right: 25px;
@@ -145,12 +159,16 @@ $red: #c62828;
         border-left: 5px solid $blue;
     }
 
-    &__thumbnail__img {
-        border: 1px solid $border-color;
-        border-radius: 50%;
-        height: 7.5rem;
-        margin-right: 25px;
-        width: 7.5rem;
+    &__thumbnail {
+        width: 10rem;
+
+        &__img {
+            border: 1px solid $border-color;
+            border-radius: 50%;
+            height: 7.5rem;
+            margin-right: 2.5rem;
+            width: 7.5rem;
+        }
 
         @media screen and (max-width: 599px) {
             display: none;
@@ -171,9 +189,11 @@ $red: #c62828;
     }
 
     &__text {
+        -webkit-box-orient: vertical;  
+        box-orient: vertical;
         display: -webkit-box;
         -webkit-line-clamp: 1;
-        -webkit-box-orient: vertical;  
+        line-clamp: 1;
         overflow: hidden;
     }
 
@@ -197,11 +217,16 @@ $red: #c62828;
         }
     }
 
+    &--add-item,
+    &--remove,
+    &--show-hide {
+        border-radius: 50%;
+        padding: 15px 17px;
+    }
+
     &--remove {
         border: 1px solid transparent;
-        border-radius: 50%;
         display: block;
-        padding: 1.5rem 1.7rem;
         
         &:hover {
             border: 1px solid $border-color;
@@ -209,10 +234,9 @@ $red: #c62828;
         }
     }
 
+    &--add-item,
     &--show-hide {
-        border-radius: 50%;
-        margin-left: 10px;
-        padding: 1.5rem 1.7rem;
+        margin-left: 5px;
 
         &:hover {
             background-color: $border-color;

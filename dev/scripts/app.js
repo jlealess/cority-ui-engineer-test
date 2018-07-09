@@ -20,11 +20,8 @@ class App extends React.Component {
     this.removeItem = this.removeItem.bind(this);
   }
 
-  collapseAccordion() {
-    console.log('collapsing');
-  }
-
   calculateNewItems() {
+    // calculate number of articles stored in state that have the property of 'new' set to true
     let newItems = 0;
     const newArticles = Object.keys(articles).forEach(key => {
       if (articles[key].new === true) {
@@ -35,9 +32,12 @@ class App extends React.Component {
   }
 
   loadMore() {
+    // get set of articles currently stored in state
     const currentArticles = this.state.articles;
+    // find current key with highest number
     const currentArticlesKeys = Object.keys(currentArticles).map((key) => key.substring(7,));
     let max = Math.max(...currentArticlesKeys);
+    // create three new articles and add them to the set of articles retrieved from state
     for (let i = 1; i <= 3; i++) {
       const imgLink = randomImg();
       const index = max + i;
@@ -51,8 +51,8 @@ class App extends React.Component {
       newArticle.text = generateLipsum(10);
       currentArticles[`article${index}`] = newArticle;
     }
+    // find number of items stored in currentArticles, then set state with modified object and total
     const totalItems = Object.keys(currentArticles).length;
-
     this.setState(
       {
         articles: currentArticles,
@@ -68,7 +68,9 @@ class App extends React.Component {
   }
 
   removeItem(id) {
+    // take copy of articles currently stored in state
     const currentArticles = this.state.articles;
+    // use id of the article whose remove button was clicked to remove that article from articles array, then set state with modified array
     delete currentArticles[id];
     this.setState({
       articles: currentArticles

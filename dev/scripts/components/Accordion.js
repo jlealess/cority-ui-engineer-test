@@ -6,17 +6,27 @@ class Accordion extends React.Component {
         super();
 
         this.state = {
-            accordionOpen: true
+            accordionOpen: true,
+            addContentOpen: false
         }
 
+        this.addItem = this.addItem.bind(this);
         this.collapseAccordion = this.collapseAccordion.bind(this);
     }
 
+    addItem() {
+        const addContentOpen = !this.state.addContentOpen;
+        this.setState({
+            addContentOpen
+        })
+        // additional code would go here that would perform adding functionality; since requirements don't specify behaviour of add, I've mockep up this demo to illustrate that the add button works
+    }
+
     collapseAccordion() {
-        console.log('collapsing');
         const accordionOpen = !this.state.accordionOpen;
         this.setState({
-            accordionOpen
+            accordionOpen,
+            addContentOpen: false
         })
     }
 
@@ -36,20 +46,22 @@ class Accordion extends React.Component {
                         </span>
                     </p>
                     <p className="accordion__header__new-items">
-                    {this.props.newItems}
+                        <span className="visually-hidden">New items</span>
+                        {this.props.newItems}
                     </p>
                 </div>
                 <div className="accordion__header__controls">
-                    <button className="btn btn--add-item">
-                        <i className="material-icons">add</i>
+                    <button className="btn btn--add-item" onClick={this.addItem}>
+                            {!this.state.addContentOpen ? <i className="material-icons">add</i> : <i className="material-icons">remove</i>}
+                        
                     </button>
                     <button className="btn btn--show-hide" onClick={this.collapseAccordion}>
-                            {this.state.accordionOpen ? <i className="material-icons">arrow_drop_down</i> : 
-                                <i className="material-icons">arrow_right</i>}
-                        
+                        {this.state.accordionOpen ? <i className="material-icons">arrow_drop_down</i> : 
+                            <i className="material-icons">arrow_right</i>}                        
                     </button>
                 </div>
             </header>
+            {this.state.addContentOpen && <div className="add-content"><p className="add-content__text">Adding content</p></div>}
             <ul className="accordion__items">
                 {this.state.accordionOpen === true && Object.keys(this.props.articles).sort().reverse().map((key) => {
                     return (

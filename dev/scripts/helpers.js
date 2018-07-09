@@ -56,3 +56,5 @@ export const randomImg = () => {
     const randomNum = Math.floor(Math.random() * Math.floor(1000));
     return `https://picsum.photos/150/150/?image=${randomNum}`;
 }
+
+export const compareNumbers = (a, b) => { return a - b; }

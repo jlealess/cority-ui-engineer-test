@@ -1,5 +1,6 @@
 import React from 'react';
 import Article from './Article';
+import { compareNumbers } from '../helpers';
 
 class Accordion extends React.Component {
     constructor() {
@@ -63,7 +64,11 @@ class Accordion extends React.Component {
             </header>
             {this.state.addContentOpen && <div className="add-content"><p className="add-content__text">Adding content</p></div>}
             <ul className="accordion__items">
-                {this.state.accordionOpen === true && Object.keys(this.props.articles).sort().reverse().map((key) => {
+                    {this.state.accordionOpen === true && Object.keys(this.props.articles).sort((a, b) => {
+                        const numA = a.substring(7,);
+                        const numB = b.substring(7,);
+                        return parseInt(numA) - parseInt(numB);
+                    }).reverse().map((key) => {
                     return (
                         <li className="accordion__item" key={key} id={key}>
                             <Article article={this.props.articles[key]} id={key} removeItem={this.props.removeItem} />

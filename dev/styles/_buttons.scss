@@ -1,0 +1,41 @@
+.btn {
+    background-color: transparent;
+    border: none;
+    padding: 0;
+    transition: all 0.5s ease-in-out;
+
+    &--link {
+        color: $blue;
+        text-decoration: underline;
+
+        &:hover {
+            color: darken($blue, 20);
+        }
+    }
+
+    &--add-item,
+    &--remove,
+    &--show-hide {
+        border-radius: 50%;
+        padding: 15px 17px;
+    }
+
+    &--remove {
+        border: 1px solid transparent;
+        display: block;
+        
+        &:hover {
+            border: 1px solid $border-color;
+            box-shadow: 0 3px 5px #cccccc;
+        }
+    }
+
+    &--add-item,
+    &--show-hide {
+        margin-left: 5px;
+
+        &:hover {
+            background-color: $border-color;
+        }
+    }
+}

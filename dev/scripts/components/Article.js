@@ -1,8 +1,11 @@
 import React from 'react';
+import { truncate } from '../helpers';
 
 const Article = (props) => {
+    const text = truncate(props.article.text);
+
     return (
-        <article className="article">
+        <article className={props.article.new ? "article article--new" : "article"}>
             <a href={`/articles/${props.id}`} className="article__link">
             <div className="article__thumbnail">
                 <img className="article__thumbnail__img" src={props.article.imgLink} alt={props.article.headline} />
@@ -15,7 +18,9 @@ const Article = (props) => {
                     {props.article.subhead}
               </h3>
                 <p className="article__text">
-                    {props.article.text}
+                    <span className="article__text__content">
+                        {text}
+                    </span>
               </p>
                 <p className="article__date">
                     <span className="article__date__icon">
@@ -28,12 +33,11 @@ const Article = (props) => {
                 </span>
                 </p>
             </div>
-            <button className="btn btn--remove">
+            </a>
+            <button className="btn btn--remove article__btn" onClick={() => {props.removeItem(props.id)}}>
                 <i className="material-icons">delete</i>
             </button>
-            </a>
         </article>
-
     )
 }
 

@@ -8,7 +8,7 @@ const Article = (props) => {
 
     return (
         <article className={props.article.new ? "article article--new" : "article"}>
-            <a href={`/articles/${props.id}`} className="article__link">
+            <a href={`/articles/article-${props.id}`} className="article__link">
             <div className="article__thumbnail">
                     <img className="article__thumbnail__img" src={props.article.imgLink.length > 0 ? props.article.imgLink : pathToDefaultImg} alt={props.article.headline} onError={(e) => { e.target.src = pathToDefaultImg; }}/>
             </div>

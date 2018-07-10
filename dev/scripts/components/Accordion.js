@@ -33,6 +33,7 @@ class Accordion extends React.Component {
 
     render() {
         const statusClass = this.state.accordionOpen ? "open" : "closed";
+        const articlesNewestFirst = Array.from(this.props.articles).reverse();
 
         return (
         <section className={`accordion ${statusClass}`}>
@@ -64,14 +65,10 @@ class Accordion extends React.Component {
             </header>
             {this.state.addContentOpen && <div className="add-content"><p className="add-content__text">Adding content</p></div>}
             <ul className="accordion__items">
-                    {this.state.accordionOpen === true && Object.keys(this.props.articles).sort((a, b) => {
-                        const numA = a.substring(7,);
-                        const numB = b.substring(7,);
-                        return parseInt(numA) - parseInt(numB);
-                    }).reverse().map((key) => {
+                    {this.state.accordionOpen === true && articlesNewestFirst.map((article, i) => {
                     return (
-                        <li className="accordion__item" key={key} id={key}>
-                            <Article article={this.props.articles[key]} id={key} removeItem={this.props.removeItem} />
+                        <li className="accordion__item" key={i} id={i}>
+                            <Article article={article} id={i} removeItem={this.props.removeItem} />
                         </li>
                     )
                 })}

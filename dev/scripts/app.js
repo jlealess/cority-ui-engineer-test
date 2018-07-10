@@ -9,7 +9,7 @@ class App extends React.Component {
     super();
 
     const newItems = this.calculateNewItems();
-    const totalItems = Object.keys(articles).length;
+    const totalItems = articles.length;
 
     this.state = {
       articles,
@@ -23,8 +23,8 @@ class App extends React.Component {
   calculateNewItems() {
     // calculate number of articles stored in state that have the property of 'new' set to true
     let newItems = 0;
-    const newArticles = Object.keys(articles).forEach(key => {
-      if (articles[key].new === true) {
+    const newArticles = articles.forEach(article => {
+      if (article['new'] === true) {
         newItems++;
       }
     });
@@ -36,13 +36,9 @@ class App extends React.Component {
     
     // get set of articles currently stored in state
     const currentArticles = this.state.articles;
-    // find current key with highest number
-    const currentArticlesKeys = Object.keys(currentArticles).map((key) => key.substring(7,));
-    let max = Math.max(...currentArticlesKeys);
     // create three new articles and add them to the set of articles retrieved from state
     for (let i = 1; i <= 3; i++) {
       const imgLink = randomImg();
-      const index = max + i;
       const date = today();
       const newArticle = {};
       newArticle.date = date;
@@ -51,10 +47,10 @@ class App extends React.Component {
       newArticle.new = true;
       newArticle.subhead = generateLipsum(5);
       newArticle.text = generateLipsum(10);
-      currentArticles[`article${index}`] = newArticle;
+      currentArticles.push(newArticle);
     }
     // find number of items stored in currentArticles, then set state with modified object and total
-    const totalItems = Object.keys(currentArticles).length;
+    const totalItems = currentArticles.length;
     this.setState(
       {
         articles: currentArticles,
@@ -73,7 +69,7 @@ class App extends React.Component {
     // take copy of articles currently stored in state
     const currentArticles = this.state.articles;
     // use id of the article whose remove button was clicked to remove that article from articles array, then set state with modified array
-    delete currentArticles[id];
+    currentArticles.splice(id, 1);
     this.setState({
       articles: currentArticles
     })

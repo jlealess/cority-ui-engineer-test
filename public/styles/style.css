@@ -205,6 +205,8 @@ body {
     list-style: none;
     margin: 0;
     padding: 0; }
+    .accordion__items__empty-message {
+      text-align: center; }
 
 .add-content {
   background: #d6efff;

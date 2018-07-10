@@ -65,6 +65,7 @@ class Accordion extends React.Component {
             </header>
             {this.state.addContentOpen && <div className="add-content"><p className="add-content__text">Adding content</p></div>}
             <ul className="accordion__items">
+                    {(this.state.accordionOpen === true && this.props.articles.length === 0) && <p className="accordion__items__empty-message">No items to display right now</p> }
                     {this.state.accordionOpen === true && articlesNewestFirst.map((article, i) => {
                     return (
                         <li className="accordion__item" key={i} id={i}>

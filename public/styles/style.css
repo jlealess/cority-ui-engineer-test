@@ -1,3 +1,4 @@
+/* normalize + helper classes */
 article, aside, details, figcaption, figure, footer, header, hgroup, nav, section, summary {
   display: block; }
 
@@ -146,13 +147,18 @@ img {
   clip: rect(0 0 0);
   overflow: hidden; }
 
+/* sass variables */
+/* basic setup */
 html {
   font-size: 62.5%; }
 
 body {
   background: white;
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
   font-size: 1.6rem; }
+
+.app {
+  padding: 1.5rem; }
 
 .accordion {
   border: 1px solid #d7d7d7;
@@ -208,15 +214,61 @@ body {
     .accordion__items__empty-message {
       text-align: center; }
 
-.add-content {
-  background: #d6efff;
-  padding: 15px;
-  text-align: center; }
-  .add-content__text {
-    margin: 0; }
-
-.app {
-  padding: 1.5rem; }
+.article {
+  border-left: 5px solid transparent;
+  margin-right: 25px;
+  padding-right: 25px;
+  position: relative; }
+  .article__btn {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%); }
+  .article__date, .article__text {
+    color: #777777;
+    margin-bottom: 3px; }
+  .article__date {
+    font-size: 1.4rem;
+    margin: 0;
+    position: relative; }
+    .article__date__icon {
+      top: 3px;
+      padding-right: 2px;
+      position: relative; }
+  .article__link {
+    align-items: center;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    padding: 15px 25px 15px 20px;
+    text-decoration: none; }
+  .article--new {
+    border-left: 5px solid #0072bc; }
+  .article__thumbnail {
+    width: 10rem; }
+    .article__thumbnail__img {
+      border: 1px solid #d7d7d7;
+      border-radius: 50%;
+      height: 7.5rem;
+      margin-right: 2.5rem;
+      width: 7.5rem; }
+    @media screen and (max-width: 599px) {
+      .article__thumbnail {
+        display: none; } }
+  .article__subtitle, .article__text, .article__title {
+    font-size: 1.6rem;
+    margin-top: 0; }
+  .article__subtitle, .article__title {
+    color: #333333;
+    margin-bottom: 5px; }
+  .article__text {
+    -webkit-box-orient: vertical;
+    box-orient: vertical;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    line-clamp: 1;
+    overflow: hidden; }
+  .article__subtitle {
+    font-weight: 400; }
 
 .article {
   border-left: 5px solid transparent;

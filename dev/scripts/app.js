@@ -16,8 +16,32 @@ class App extends React.Component {
       newItems,
       totalItems
     }
+    this.addItem = this.addItem.bind(this);
     this.loadMore = this.loadMore.bind(this);
     this.removeItem = this.removeItem.bind(this);
+  }
+  addItem() {
+    /* NOTE: since requirements don't specify behaviour of 'add', I've mocked up this demo to illustrate that the add button works, and to illustrate how the new items counter could work */
+
+    // get set of articles currently stored in state
+    const currentArticles = this.state.articles;
+    // create new articles and add to the set of articles retrieved from state
+    const newArticle = this.createNewArticle(true);
+    currentArticles.push(newArticle);
+    // find number of items stored in currentArticles, then set state with modified object and total
+    const totalItems = currentArticles.length;
+    this.setState(
+      {
+        articles: currentArticles,
+        totalItems
+      },
+      () => {
+        const newItems = this.calculateNewItems();
+        this.setState({
+          newItems
+        });
+      }
+    );
   }
 
   calculateNewItems() {
@@ -31,25 +55,30 @@ class App extends React.Component {
     return newItems;
   }
 
+  createNewArticle(newTrue) {
+    const imgLink = randomImg();
+    const date = today();
+    const newArticle = {};
+    newArticle.date = date;
+    newArticle.headline = generateLipsum(3);
+    newArticle.imgLink = imgLink;
+    newArticle.new = newTrue;
+    newArticle.subhead = generateLipsum(5);
+    newArticle.text = generateLipsum(10);
+    return newArticle;
+  }
+
   loadMore() {
-    /* NOTE: I wanted to try adding functionality to the "load more" button; without being certain what the intended functionality is for this component, I wasn't sure if it woud load newer items or older ones. For demo purposes, I have set them all to new in order to keep updating the new items counter. */
+    /* NOTE: I wanted to try adding functionality to the "load more" button; without being certain what the intended functionality is for this component, I am assuming it would load older items. */
     
     // get set of articles currently stored in state
     const currentArticles = this.state.articles;
     // create three new articles and add them to the set of articles retrieved from state
     for (let i = 1; i <= 3; i++) {
-      const imgLink = randomImg();
-      const date = today();
-      const newArticle = {};
-      newArticle.date = date;
-      newArticle.headline = generateLipsum(3);
-      newArticle.imgLink = imgLink;
-      newArticle.new = true;
-      newArticle.subhead = generateLipsum(5);
-      newArticle.text = generateLipsum(10);
-      currentArticles.push(newArticle);
+      const newArticle = this.createNewArticle(false);
+      currentArticles.unshift(newArticle);
     }
-    // find number of items stored in currentArticles, then set state with modified object and total
+    // find number of items stored in currentArticles, then set state with modified array and total
     const totalItems = currentArticles.length;
     this.setState(
       {
@@ -77,6 +106,7 @@ class App extends React.Component {
   
   render() {
     return <Accordion 
+              addItem={this.addItem}
               articles={this.state.articles} 
               collapseAccordion={this.collapseAccordion}
               listName='List Name' 
